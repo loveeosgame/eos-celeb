@@ -1,17 +1,16 @@
 #cleos wallet unlock -n www --password PW5JDQJvz73w73eNEtthCRhLn9gieFki5uiZu1JZdjwMftVA3f4cG
 
-cleos wallet unlock --password PW5JaGpLtoM1vtD1WxiAC4RDsr82FRUczmKgocw1KJZqVahB4LZ1u
-/usr/local/eosio/bin/eosiocpp -g eoscrazytown/eoscrazytown.abi  eoscrazytown/eoscrazytown.cpp
-/usr/local/eosio/bin/eosiocpp -o eoscrazytown/eoscrazytown.wast eoscrazytown/eoscrazytown.cpp
+eosiocpp -g eoscrazytown/eoscrazytown.abi  eoscrazytown/eoscrazytown.cpp
+eosiocpp -o eoscrazytown/eoscrazytown.wast eoscrazytown/eoscrazytown.cpp
 
 # push action eosio.token transfer '[ "eosotcbackup", "crazytown.bp", "0.0330 EOS", "buy 0" ]' -p eosotcbackup@active
 
 #cleos -u http://api.eosbeijing.one push action crazytown.bp newbag '[ "minakokojima", "0.0100 EOS" ]' -p crazytown.bp@active minakokojima@active
 
 
-cleos -u http://api.eosbeijing.one push action crazytown.bp newbag '[ "crazytown.bp", "0.0100 EOS" ]' -p crazytown.bp@active crazytown.bp@active
+# cleos -u http://api.eosbeijing.one push action crazytown.bp newbag '[ "crazytown.bp", "0.0100 EOS" ]' -p crazytown.bp@active crazytown.bp@active
 
-cleos -u http://api.eosbeijing.one set contract crazytown.bp eoscrazytown -p crazytown.bp@active
+cleos set contract user1 eoscrazytown -p user1
 
 #cleos -u http://api.eosbeijing.one get table crazytown.bp crazytown.bp bag
 #cleos -u http://api.eosbeijing.one get table crazytown.bp crazytown.bp bagsglobal
