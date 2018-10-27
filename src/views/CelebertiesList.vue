@@ -45,7 +45,7 @@
         <div class="column is-3" v-for="priceInfo in orderList(filterList(celebPriceList))" :key="priceInfo.id" v-if="celebBaseList[priceInfo.id]">
           <div class="celeb-card">
             <div class="celeb-image">
-              <img :src="`https://eosheros.togetthere.cn/image/${celebBaseList[priceInfo.id].id}.jpg`">
+              <img :src="`http://test.cdn.hackx.org/heros/${celebBaseList[priceInfo.id].id}.jpg`">
             </div>
             <div class="celeb-name"><p class="title">{{celebBaseList[priceInfo.id].name}}</p></div>
             <div class="celeb-holder">
@@ -72,98 +72,102 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
-import BuyModal from '@/components/BuyModal'
-import EditSloganModal from '@/components/EditSloganModal'
-import orderBy from 'lodash.orderby'
-import * as util from '../blockchain/util'
+import { mapState, mapGetters } from "vuex";
+import BuyModal from "@/components/BuyModal";
+import EditSloganModal from "@/components/EditSloganModal";
+import orderBy from "lodash.orderby";
+import * as util from "../blockchain/util";
 
 export default {
-  name: 'celeberties-list',
+  name: "celeberties-list",
   components: {
     BuyModal,
     EditSloganModal
   },
   computed: {
     ...mapState([
-      'celebBaseList',
-      'celebPriceList',
-      'dataIsLoading',
-      'globalInfo'
+      "celebBaseList",
+      "celebPriceList",
+      "dataIsLoading",
+      "globalInfo"
     ]),
-    ...mapGetters(['account'])
+    ...mapGetters(["account"])
   },
   data: () => ({
     isBuyDialogActive: false,
     isEditSloganDialogActive: false,
     currentBuy: null,
-    globalCountdown: '00:00:00',
-    orderBy: 'desc',
-    filter: 'none'
+    globalCountdown: "00:00:00",
+    orderBy: "desc",
+    filter: "none"
   }),
-  created: function () {
+  created: function() {
     if (this.$route.params.account) {
-      console.log('Referrer: %s', this.$route.params.account)
-      localStorage.setItem('eos_celeb_referrer', this.$route.params.account)
+      console.log("Referrer: %s", this.$route.params.account);
+      localStorage.setItem("eos_celeb_referrer", this.$route.params.account);
     }
 
     this.countdownUpdater = setInterval(() => {
       if (this.globalInfo != null) {
-        const currentTimestamp = ~~(Date.now() / 1000)
+        const currentTimestamp = ~~(Date.now() / 1000);
         if (currentTimestamp >= this.globalInfo.ed) {
-          this.globalCountdown = this.$t('info_count_down_end')
+          this.globalCountdown = this.$t("info_count_down_end");
         } else {
-          let remaining = this.globalInfo.ed - currentTimestamp
-          this.globalCountdown = util.formatCountdown(remaining)
+          let remaining = this.globalInfo.ed - currentTimestamp;
+          this.globalCountdown = util.formatCountdown(remaining);
         }
       }
-    }, 1000)
+    }, 1000);
   },
-  destroyed: function () {
+  destroyed: function() {
     if (this.countdownUpdater) {
-      clearInterval(this.countdownUpdater)
+      clearInterval(this.countdownUpdater);
     }
   },
   methods: {
-    buy (priceInfo) {
-      this.currentBuy = priceInfo
-      this.isBuyDialogActive = true
+    buy(priceInfo) {
+      this.currentBuy = priceInfo;
+      this.isBuyDialogActive = true;
     },
-    edit (priceInfo) {
-      this.currentBuy = priceInfo
-      this.isEditSloganDialogActive = true
+    edit(priceInfo) {
+      this.currentBuy = priceInfo;
+      this.isEditSloganDialogActive = true;
     },
-    orderList (list) {
-      if (this.orderBy === 'asc') {
-        return orderBy(list, ['price', 'id'], ['asc', 'asc'])
-      } else if (this.orderBy === 'desc') {
-        return orderBy(list, ['price', 'id'], ['desc', 'asc'])
+    orderList(list) {
+      if (this.orderBy === "asc") {
+        return orderBy(list, ["price", "id"], ["asc", "asc"]);
+      } else if (this.orderBy === "desc") {
+        return orderBy(list, ["price", "id"], ["desc", "asc"]);
       } else {
-        return list
+        return list;
       }
     },
-    filterList (list) {
-      if (this.filter === 'buy') {
-        return list.filter(item => this.account !== null && item.owner === this.account.name)
-      } else if (this.filter === 'not-buy') {
-        return list.filter(item => this.account !== null && item.owner !== this.account.name)
+    filterList(list) {
+      if (this.filter === "buy") {
+        return list.filter(
+          item => this.account !== null && item.owner === this.account.name
+        );
+      } else if (this.filter === "not-buy") {
+        return list.filter(
+          item => this.account !== null && item.owner !== this.account.name
+        );
       } else {
-        return list
+        return list;
       }
     },
-    truncate (str) {
+    truncate(str) {
       try {
         if (str.length > 10) {
-          return str.substr(0, 10) + '...'
+          return str.substr(0, 10) + "...";
         } else {
-          return str
+          return str;
         }
       } catch (e) {
-        return str
+        return str;
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>
