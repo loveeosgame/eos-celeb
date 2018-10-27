@@ -1,11 +1,11 @@
 export default {
   announcement: '公告：根据大多数群友的意见，我们决定于北京时间 2018 年 10 月 18 日零点关闭该项目，按关闭时的购买额度瓜分奖池。若有疑问或表示反对，请加入我们的电报群（见「关于」页面）。',
-  EOSCelebrity: 'EOS 加密名人',
+  EOSCelebrity: '纯粹的资金盘',
   nav_switch_lang: '切换语言',
   nav_switch_lang_en: '英语',
   nav_switch_lang_zh: '中文',
   nav_switch_lang_jp: '日语',
-  nav_celeb_list: '名人列表',
+  nav_celeb_list: '水浒英雄列表',
   nav_leaderboard: '排行榜',
   nav_about: '关于',
   nav_sign_in: '登录',
@@ -21,9 +21,9 @@ export default {
   info_order_by_asc: '价格从低到高',
   info_order_by_desc: '价格从高到低',
   info_filter: '过滤',
-  info_filter_none: '显示全部名人',
-  info_filter_buy: '我的名人',
-  info_filter_not_buy: '未拥有的名人',
+  info_filter_none: '显示全部水浒英雄',
+  info_filter_buy: '我的水浒英雄',
+  info_filter_not_buy: '未拥有的水浒英雄',
   card_owner: '持有者',
   card_buy_after_login: '登录后购买',
   card_buy: '购买',
@@ -39,7 +39,7 @@ export default {
   buy_modal_msg_fail_overdrawn: '您的账户余额不足',
   buy_modal_msg_fail_no_enough: '有人比您抢先一步买下了该名人',
   buy_modal_msg_fail_time: '还没有到开始时间，或已超过结束时间',
-  buy_modal_msg_fail_celeb_not_exist: '该名人不存在或暂未开放',
+  buy_modal_msg_fail_celeb_not_exist: '该英雄不存在或暂未开放',
   invite_modal_title: '邀请好友获得奖励',
   invite_modal_label: '邀请链接',
   invite_modal_copy: '复制',
@@ -58,7 +58,7 @@ export default {
   leaderboard_label_name: '用户',
   leaderboard_label_total_value: '总资产',
   leaderboard_label_celeb_count: '名人数',
-  leaderboard_label_celeb_top: '拥有名人 (价值 TOP 5)',
+  leaderboard_label_celeb_top: '拥有水浒英雄 (价值 TOP 5)',
   about_content: `
   <h2>加入社区</h2>
   <p><a href="https://t.me/joinchat/GwrwAxBDAxSDsIlzB1V19w" target="_blank">电报群</a>
@@ -68,10 +68,9 @@ export default {
   <p>&nbsp;</p>
   <p>溢价的35% 按照以下比率分配</p>
   <ul>
-    <li>前一个人拿 60%</li>
-    <li>奖池 20%</li>
-    <li>邀请者 10% 如无邀请者则 这笔钱会放到奖池</li>
-    <li>团队 10% （ram费用及维护费用）</li>
+    <li>前一个人拿 89.9%</li>
+    <li>奖池 10%</li>
+    <li>团队 0.01% （ram费用及维护费用）</li>
   </ul>
   <h2>举个例子：</h2>
   <p>如特朗普当前价格为 10 EOS</p>
@@ -79,10 +78,20 @@ export default {
   <p>10 EOS 首先给前一个购买者</p>
   <p>剩下的 10*0.35=3.5 EOS 按照比率分配</p>
   <ul>
-    <li>前一个人拿：3.5*60%=2.1 EOS</li>
-    <li>奖池拿 3.5*20%=0.7 EOS</li>
-    <li>邀请者拿 3.5*10%=0.35 EOS</li>
-    <li>团队拿 3.5*10%=0.35 EOS</li>
+    <li>前一个人拿：3.5*89.9%=3.143 EOS</li>
+    <li>奖池拿 3.5*10%=0.35 EOS</li>
+    <li>团队拿 3.5*0.01%=0.035 EOS</li>
   </ul>
+
+  <h2>fomo</h2>
+  <p>fomo时间设置为1小时</p>
+  <p>每次有人购买就加1分钟，最多累计到1小时</p>
+
+  <h2>补偿损失者</h2>
+  <p>第一盘结束后</p>
+  <p>后续根据所占英雄的金额，来分发某种token(大奖得主没有）</p>
+  <p>第二盘会拿出10%的钱 给前一盘token持有者</p>
+  
+  
   `
 }

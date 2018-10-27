@@ -1,11 +1,11 @@
 export default {
   announcement: 'Announcement: According to opinions from majority, we decided to close this project at Oct 18 00:00:00 CST. Celebrity owners will devide the pot according to the bid price at that moment. If you have questions or is against to this move, please join our Telegram group (see About page) to discuss.',
-  EOSCelebrity: 'EOS Celebrity',
+  EOSCelebrity: 'Fund disk',
   nav_switch_lang: 'Language',
   nav_switch_lang_en: 'ENGLISH',
   nav_switch_lang_zh: 'CHINESE',
   nav_switch_lang_jp: 'JAPANESE',
-  nav_celeb_list: 'Celebrity List',
+  nav_celeb_list: 'hero List',
   nav_leaderboard: 'Leaderboard',
   nav_about: 'About',
   nav_sign_in: 'Sign In',
@@ -21,9 +21,9 @@ export default {
   info_order_by_asc: 'Price Descending',
   info_order_by_desc: 'Price Ascending',
   info_filter: 'Filter',
-  info_filter_none: 'All Celebrities',
-  info_filter_buy: 'Celebrities Owned',
-  info_filter_not_buy: 'Celebrities Not Owned',
+  info_filter_none: 'All Heros',
+  info_filter_buy: 'Heros Owned',
+  info_filter_not_buy: 'Heros Not Owned',
   card_owner: 'Owner',
   card_buy_after_login: 'Purchase after login',
   card_buy: 'Purchase',
@@ -39,7 +39,7 @@ export default {
   buy_modal_msg_fail_overdrawn: 'Insufficient balance',
   buy_modal_msg_fail_no_enough: 'Some one has already purchased it',
   buy_modal_msg_fail_time: 'Purchase stage not started or is closed',
-  buy_modal_msg_fail_celeb_not_exist: 'Celebrity does not exist or not open for purchase',
+  buy_modal_msg_fail_celeb_not_exist: 'Hero does not exist or not open for purchase',
   invite_modal_title: 'Invite Friend and Get Bonus',
   invite_modal_label: 'Invitation URL',
   invite_modal_copy: 'Copy',
@@ -57,8 +57,8 @@ export default {
   leaderboard_label_rank: 'Rank',
   leaderboard_label_name: 'Name',
   leaderboard_label_total_value: 'Asset Value',
-  leaderboard_label_celeb_count: 'Owned Celebrities',
-  leaderboard_label_celeb_top: 'Most Valued 5 Celebrities',
+  leaderboard_label_celeb_count: 'Owned Heros',
+  leaderboard_label_celeb_top: 'Most Valued 5 Heros',
   about_content: `
   <h2>Join Community</h2>
   <p><a href="https://t.me/joinchat/GwrwAxBDAxSDsIlzB1V19w" target="_blank">Telegram group</a>
@@ -68,10 +68,9 @@ export default {
   <p>&nbsp;</p>
   <p>35% of premium is allocated according to the following ratio</p>
   <ul>
-    <li>The previous person took 60%</li>
-    <li>Pot 20%</li>
-    <li>Inviters 10%, If there are no invitees, the money will be placed in the pot</li>
-    <li>Team 10% (ram fee and maintenance fee)</li>
+    <li>The previous person took 89.9%</li>
+    <li>Pot 10%</li>
+    <li>Team 0.01% (ram fee and maintenance fee)</li>
   </ul>
   <h2>For example:</h2>
   <p>The current price for Trump is 10 EOS</p>
@@ -79,10 +78,18 @@ export default {
   <p>10 EOS are paied to the previous buyer</p>
   <ul>
     <li>The remaining 10*0.35=3.5 EOS will be allocated according to the ratio</li>
-    <li>Previous buyer takes 3.5*60%=2.1 EOS</li>
-    <li>Pot pool takes 3.5*20%=0.7 EOS</li>
-    <li>Inviter takes 3.5*10%=0.35 EOS</li>
-    <li>The team takes 3.5*10%=0.35 EOS</li>
+    <li>Previous buyer takes 3.5*89.9%=3.143 EOS</li>
+    <li>Pot pool takes 3.5*10%=0.35 EOS</li>
+    <li>The team takes 3.5*0.1%=0.035 EOS</li>
   </ul>
+
+  <h2>fomo</h2>
+  <p>Fomo time is set to 1 hour  </p>
+  <p>Add 1 minute each time someone buys, up to 1 hour</p>
+
+  <h2>Compensation loss</h2>
+  <p>After the end of the first set</p>
+  <p>Subsequent distribution of a certain token based on the amount of the hero (the grand prize winner does not)</p>
+  <p>The second set will give 10% of the money to the previous token holder .</p>
   `
 }
