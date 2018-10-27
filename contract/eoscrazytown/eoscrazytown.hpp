@@ -35,7 +35,7 @@ class eoscrazytown : public eosio::contract
                                       bags(_self, _self) {}
 
     // @abi action
-    void init(const checksum256 &hash);
+    void init();
     // @abi action
     void clear();
 

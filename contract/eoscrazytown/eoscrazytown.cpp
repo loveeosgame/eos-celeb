@@ -1,7 +1,7 @@
 #include "eoscrazytown.hpp"
 
 // @abi action
-void eoscrazytown::init(const checksum256 &hash)
+void eoscrazytown::init()
 {
     require_auth(_self);
 
@@ -20,7 +20,7 @@ void eoscrazytown::newbag(account_name &from, asset &eos)
 {
 
     require_auth(_self);
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < 57; ++i)
     {
         bags.emplace(from, [&](auto &p) {
             p.id = bags.available_primary_key();
