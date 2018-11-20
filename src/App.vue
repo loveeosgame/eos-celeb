@@ -101,14 +101,14 @@ export default {
     })
 
     // if (localStorage.getItem('eos_celeb_ann') !== '2') {
-    this.$snackbar.open({
-      message: this.$t('announcement'),
-      type: 'is-warning',
-      position: 'is-top',
-      actionText: 'OK',
-      indefinite: true
-      // onAction: () => localStorage.setItem('eos_celeb_ann', '2'),
-    })
+    // this.$snackbar.open({
+    //   message: this.$t('announcement'),
+    //   type: 'is-warning',
+    //   position: 'is-top',
+    //   actionText: 'OK',
+    //   indefinite: true
+    //   // onAction: () => localStorage.setItem('eos_celeb_ann', '2'),
+    // })
     // }
   },
   methods: {
