@@ -104,7 +104,7 @@ export default {
     globalCountdown: "00:00:00",
     orderBy: "desc",
     filter: "none",
-    showTimer: true,
+    showTimer: false,
     time: "0:00:00"
   }),
   created: function() {
