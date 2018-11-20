@@ -15,6 +15,8 @@ export default {
   info_pot: 'Pot',
   info_count_down: 'Close Count Down',
   info_count_down_end: 'Closed',
+  will_open_before: 'The Game Open Count Down ',
+  will_open_after: '',
   info_new_celeb_count_down: 'New Item Count Down',
   info_last_buyer: 'Last Buyer',
   info_order_by: 'Sort',

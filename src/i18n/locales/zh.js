@@ -14,6 +14,8 @@ export default {
   nav_sign_out: '登出',
   info_pot: '奖池',
   info_count_down: '结束倒计时',
+  will_open_before: '游戏将于',
+  will_open_after: '后开始',
   info_count_down_end: '已结束',
   info_new_celeb_count_down: '新名人倒计时',
   info_last_buyer: '最后买家',
