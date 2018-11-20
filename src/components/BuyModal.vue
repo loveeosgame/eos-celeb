@@ -65,7 +65,7 @@ export default {
         return this.priceInfo.nextprice;
       }
     },
-    getcheecksum(id, price) {
+    getchecksum(id, price) {
       return id * price + 1;
     },
     async buy() {
@@ -76,7 +76,7 @@ export default {
       const memo = [
         "buy",
         String(this.priceInfo.id),
-        this.getcheecksum(this.priceInfo.id, price)
+        this.getchecksum(this.priceInfo.id, price)
       ];
 
       try {
