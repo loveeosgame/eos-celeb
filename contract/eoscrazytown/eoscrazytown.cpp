@@ -84,6 +84,8 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
         auto checkout = eos.amount - itr->price; //拿到0.35的钱
 
         auto g = _bagsglobal.get_or_default();
+        eosio_assert(now() > g.st, "game not start");
+        eosio_assert(now() < g.ed, "game over");
         g.team += checkout * 5 / 1000; //0.5 %
         g.pool += checkout * 10 / 100; //10%
         g.last = from;
