@@ -39,7 +39,14 @@ const errorMessages = {
     message: "buy_modal_msg_fail_no_enough",
     refresh: true
   },
-  "not correct time": {
+  "pls check amount": {
+    message: "buy_modal_msg_fail_no_enough",
+    refresh: true
+  },
+  "game not start": {
+    message: "buy_modal_msg_fail_time"
+  },
+  "game over": {
     message: "buy_modal_msg_fail_time"
   },
   "no character exist": {
@@ -106,15 +113,6 @@ export default {
               message: this.$t("buy_modal_msg_cancel", { buyTarget }),
               position: "is-bottom",
               queue: false
-            });
-          } else if (error.message.indexOf("pls check amount") > -1) {
-            this.$dialog.alert({
-              title: this.$t("buy_modal_msg_fail_title"),
-              message: this.$t("buy_modal_msg_fail_body1"),
-              onConfirm: () => {
-                this.$parent.close();
-                this.$store.dispatch("updateCeleb");
-              }
             });
           } else {
             this.$dialog.alert({
