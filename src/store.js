@@ -41,35 +41,35 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setScatter(state, scatter) {
+    setScatter (state, scatter) {
       state.scatter = scatter
       state.eos = scatter.eos(network, Eos, {})
       state.identity = scatter.identity
     },
-    setIdentity(state, identity) {
+    setIdentity (state, identity) {
       state.identity = identity
     },
-    setCelebBase(state, baseList) {
+    setCelebBase (state, baseList) {
       state.celebBaseList = baseList
     },
-    setCelebPrice(state, priceList) {
+    setCelebPrice (state, priceList) {
       state.celebPriceList = priceList
     },
-    setBalance(state, {
+    setBalance (state, {
       symbol,
       balance
     }) {
       state.balance[symbol] = balance || `0.0000 ${symbol.toUpperCase()}`
     },
-    setDataLoading(state, loading) {
+    setDataLoading (state, loading) {
       state.dataIsLoading = loading
     },
-    setGlobal(state, globalInfo) {
+    setGlobal (state, globalInfo) {
       state.globalInfo = globalInfo
     }
   },
   actions: {
-    initScatter({
+    initScatter ({
       commit,
       dispatch
     }, scatter) {
@@ -79,7 +79,7 @@ export default new Vuex.Store({
         dispatch('updateCeleb', true)
       }, 30 * 1000)
     },
-    async updateCeleb({
+    async updateCeleb ({
       commit
     }, isBackground) {
       try {
@@ -101,12 +101,12 @@ export default new Vuex.Store({
         console.error(e)
       }
     },
-    updateBalance({
+    updateBalance ({
       commit
     }) {
       getMyBalancesByContract({
-          symbol: 'eos'
-        })
+        symbol: 'eos'
+      })
         .then((price) => {
           commit('setBalance', {
             symbol: 'eos',
@@ -114,9 +114,9 @@ export default new Vuex.Store({
           })
         })
       getMyBalancesByContract({
-          symbol: 'kby',
-          tokenContract: 'dacincubator'
-        })
+        symbol: 'kby',
+        tokenContract: 'dacincubator'
+      })
         .then((price) => {
           commit('setBalance', {
             symbol: 'kby',
@@ -124,7 +124,7 @@ export default new Vuex.Store({
           })
         })
     },
-    setIdentity({
+    setIdentity ({
       commit,
       dispatch
     }, identity) {

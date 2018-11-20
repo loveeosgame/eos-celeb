@@ -22,7 +22,7 @@ for (let contractId in celebIdList) {
   celebIdContractMap[contractId] = celebIdMap[celebIdList[contractId]]
 }
 
-export async function getGlobal() {
+export async function getGlobal () {
   const {
     rows
   } = await eos().getTableRows({
@@ -34,11 +34,11 @@ export async function getGlobal() {
   return rows[0]
 }
 
-export async function getCelebBaseList() {
+export async function getCelebBaseList () {
   return celebIdContractMap
 }
 
-export async function getCelebPriceList() {
+export async function getCelebPriceList () {
   const {
     rows
   } = await eos().getTableRows({
@@ -51,7 +51,7 @@ export async function getCelebPriceList() {
   return rows
 }
 
-export async function changeMySlogan({
+export async function changeMySlogan ({
   from,
   id,
   memo,
