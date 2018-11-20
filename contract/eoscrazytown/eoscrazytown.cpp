@@ -84,7 +84,7 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
         auto checkout = eos.amount - itr->price; //拿到0.35的钱
 
         auto g = _bagsglobal.get_or_default();
-        g.team += checkout * 1 / 100;  //1 %
+        g.team += checkout * 5 / 1000; //0.5 %
         g.pool += checkout * 10 / 100; //10%
         g.last = from;
         g.ed = now() + 60 * 10;
@@ -97,6 +97,13 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
             N(eosio.token), N(transfer),
             make_tuple(_self, itr->owner, delta,
                        std::string("next hodl")))
+            .send();
+
+        action( // 给bocai代币持有者分红
+            permission_level{_self, N(active)},
+            N(eosio.token), N(transfer),
+            make_tuple(_self, N(eosbocaidivi), asset(checkout * 5 / 1000, EOS_SYMBOL),
+                       std::string("make_profit")))
             .send();
 
         bags.modify(itr, 0, [&](auto &t) {
