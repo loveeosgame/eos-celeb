@@ -74,23 +74,23 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
         eosio_assert(itr != bags.end(), "no character exist");
         eosio_assert(eos.amount == itr->next_price(), "pls check amount");
         auto chceksum = string_to_price(memo.c_str());
-        print("checksum:::", chceksum);
-
         if (isbot(id, eos.amount, chceksum))
         {
             return;
         }
 
+        auto checkout = eos.amount - itr->price; //拿到0.35的钱
+
         auto g = _bagsglobal.get_or_default();
-        g.team += eos.amount * 1 / 100;  //1 %
-        g.pool += eos.amount * 10 / 100; //10%
+        g.team += checkout * 1 / 100;  //1 %
+        g.pool += checkout * 10 / 100; //10%
         g.last = from;
         g.ed = now() + 60 * 10;
         _bagsglobal.set(g, _self);
 
         auto delta = eos;
-        delta.amount = eos.amount * 89 / 100; //89%
-        action(                               // winner winner chicken dinner
+        delta.amount = checkout * 89 / 100 + itr->price; //89%+上一次出的值
+        action(                                          // winner winner chicken dinner
             permission_level{_self, N(active)},
             N(eosio.token), N(transfer),
             make_tuple(_self, itr->owner, delta,

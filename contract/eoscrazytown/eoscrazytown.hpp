@@ -62,7 +62,7 @@ class eoscrazytown : public eosio::contract
     singleton_bagsglobal _bagsglobal;
 
     // @abi action
-    void newbag(account_name &from, asset &eos);
+    void newbag(asset &eos);
 
     // @abi action
     void setslogan(account_name &from, uint64_t id, string memo);
