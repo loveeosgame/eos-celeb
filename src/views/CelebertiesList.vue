@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div v-if="showTimer" class="timer">
+    {{$t('will_open_before')}}{{time}}{{$t('will_open_after')}}
+  </div>
+  <div v-else>
     <div class="container global-info">
       <nav class="level" v-if="globalInfo">
         <div class="level-item has-text-centered">
@@ -76,6 +79,7 @@ import { mapState, mapGetters } from 'vuex'
 import BuyModal from '@/components/BuyModal'
 import EditSloganModal from '@/components/EditSloganModal'
 import orderBy from 'lodash.orderby'
+import moment from 'moment'
 import * as util from '../blockchain/util'
 
 export default {
@@ -99,9 +103,35 @@ export default {
     currentBuy: null,
     globalCountdown: '00:00:00',
     orderBy: 'desc',
-    filter: 'none'
+    filter: 'none',
+    showTimer: true,
+    time: '0:00:00',
   }),
   created: function () {
+    setInterval(() => {
+      let deadLine = new Date(1542715200000)
+      let current = new Date().getTime();
+      let left = deadLine - current;
+      if (left <= 0) {
+        this.time = "00:00:00";
+        this.showTimer = false;
+        window.location.reload();
+        return;
+      }
+      let duration = moment.duration(left);
+      let seconds = duration.seconds() || 0;
+      let minutes = duration.minutes() || 0;
+      let hours = duration.hours() || 0;
+
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+
+      this.time = `${hours}:${minutes}:${seconds}`;
+    }, 1000);
     if (this.$route.params.account) {
       console.log('Referrer: %s', this.$route.params.account)
       localStorage.setItem('eos_celeb_referrer', this.$route.params.account)
@@ -174,7 +204,13 @@ export default {
 .celeb-list {
   min-height: 500px;
 }
-
+.timer {
+  margin: 200px auto;
+  overflow: hidden;
+  font-size: 40px;
+  height: 300px;
+  text-align: center;
+}
 .celeb-list .column {
   margin: 0.5rem 0;
 }
