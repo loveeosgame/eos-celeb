@@ -2,8 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Eos from 'eosjs'
 import * as API from './blockchain/celeb'
-import { getMyBalancesByContract } from './blockchain'
-import { network } from './config'
+import {
+  getMyBalancesByContract
+} from './blockchain'
+import {
+  network
+} from './config'
 
 Vue.use(Vuex)
 
@@ -22,46 +26,62 @@ export default new Vuex.Store({
     globalInfo: null
   },
   getters: {
-    account: ({ scatter }) => {
-      if (!scatter) { return null }
-      const { identity } = scatter
-      return identity ? identity.accounts.find(({ blockchain }) => blockchain === 'eos') : null
+    account: ({
+      scatter
+    }) => {
+      if (!scatter) {
+        return null
+      }
+      const {
+        identity
+      } = scatter
+      return identity ? identity.accounts.find(({
+        blockchain
+      }) => blockchain === 'eos') : null
     }
   },
   mutations: {
-    setScatter (state, scatter) {
+    setScatter(state, scatter) {
       state.scatter = scatter
       state.eos = scatter.eos(network, Eos, {})
       state.identity = scatter.identity
     },
-    setIdentity (state, identity) {
+    setIdentity(state, identity) {
       state.identity = identity
     },
-    setCelebBase (state, baseList) {
+    setCelebBase(state, baseList) {
       state.celebBaseList = baseList
     },
-    setCelebPrice (state, priceList) {
+    setCelebPrice(state, priceList) {
       state.celebPriceList = priceList
     },
-    setBalance (state, { symbol, balance }) {
+    setBalance(state, {
+      symbol,
+      balance
+    }) {
       state.balance[symbol] = balance || `0.0000 ${symbol.toUpperCase()}`
     },
-    setDataLoading (state, loading) {
+    setDataLoading(state, loading) {
       state.dataIsLoading = loading
     },
-    setGlobal (state, globalInfo) {
+    setGlobal(state, globalInfo) {
       state.globalInfo = globalInfo
     }
   },
   actions: {
-    initScatter ({ commit, dispatch }, scatter) {
+    initScatter({
+      commit,
+      dispatch
+    }, scatter) {
       commit('setScatter', scatter)
       dispatch('updateCeleb')
       setInterval(() => {
         dispatch('updateCeleb', true)
       }, 30 * 1000)
     },
-    async updateCeleb ({ commit }, isBackground) {
+    async updateCeleb({
+      commit
+    }, isBackground) {
       try {
         if (!isBackground) {
           commit('setDataLoading', true)
@@ -81,17 +101,33 @@ export default new Vuex.Store({
         console.error(e)
       }
     },
-    updateBalance ({ commit }) {
-      getMyBalancesByContract({ symbol: 'eos' })
-        .then((price) => {
-          commit('setBalance', { symbol: 'eos', balance: price[0] })
+    updateBalance({
+      commit
+    }) {
+      getMyBalancesByContract({
+          symbol: 'eos'
         })
-      getMyBalancesByContract({ symbol: 'kby', tokenContract: 'dacincubator' })
         .then((price) => {
-          commit('setBalance', { symbol: 'kby', balance: price[0] })
+          commit('setBalance', {
+            symbol: 'eos',
+            balance: price[0]
+          })
+        })
+      getMyBalancesByContract({
+          symbol: 'kby',
+          tokenContract: 'dacincubator'
+        })
+        .then((price) => {
+          commit('setBalance', {
+            symbol: 'kby',
+            balance: price[0]
+          })
         })
     },
-    setIdentity ({ commit, dispatch }, identity) {
+    setIdentity({
+      commit,
+      dispatch
+    }, identity) {
       commit('setIdentity', identity)
       dispatch('updateBalance')
     }

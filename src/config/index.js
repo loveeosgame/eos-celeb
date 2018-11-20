@@ -1,12 +1,13 @@
-import { networks } from './networks'
+import {
+  networks
+} from './networks'
 // Sigle Source of truth
 // For testnet
 // export const network = networks.kylin;
 // For EosAsia
-export const network = networks.eosasia
+export const network = networks.local
 
-export const i18n = [
-  {
+export const i18n = [{
     langDisplay: '中文',
     locale: 'zh',
     aliases: ['zh', 'zh-cn', 'zh-hk', 'zh-sg', 'zh-tw']
