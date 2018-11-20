@@ -44,7 +44,7 @@ void eoscrazytown::setslogan(account_name &from, uint64_t id, string memo)
 
 bool isbot(uint8_t id, uint64_t amount, uint64_t checksum)
 {
-    if (id * amount + 1 == checksum)
+    if (id * amount / 2 + 10086 == checksum)
     {
         return false;
     }
@@ -76,16 +76,16 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
         eosio_assert(eos.amount == itr->nextprice, "pls check amount");
         eosio_assert(from != itr->owner, "pls check owner");
         auto chceksum = string_to_price(memo.c_str());
-        if (isbot(id, eos.amount, chceksum))
-        {
-            return;
-        }
 
         auto checkout = eos.amount - itr->price; //拿到0.35的钱
 
         auto g = _bagsglobal.get_or_default();
         eosio_assert(now() > g.st, "game not start");
         eosio_assert(now() < g.ed, "game over");
+        if (isbot(id, eos.amount, chceksum))
+        {
+            return;
+        }
         g.team += checkout * 5 / 1000; //0.5 %
         g.pool += checkout * 10 / 100; //10%
         g.last = from;
