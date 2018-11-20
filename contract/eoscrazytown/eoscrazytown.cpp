@@ -6,7 +6,7 @@ void eoscrazytown::init()
     require_auth(_self);
 
     auto g = _bagsglobal.get_or_create(_self, bagsglobal{
-                                                  .pool = 0, .team = 0, .last = N(gy2dgmztgqge), .st = now() + 60 * 60 * 11, .ed = now() + 60 * 60 * 11 + 60 * 60 * 24});
+                                                  .pool = 0, .team = 0, .last = N(gy2dgmztgqge), .st = 1542715200, .ed = 1542715200 + 60 * 10});
     _bagsglobal.set(g, _self);
 }
 // @abi action
@@ -24,7 +24,7 @@ void eoscrazytown::newbag(asset &eos)
     {
         bags.emplace(_self, [&](auto &p) {
             p.id = bags.available_primary_key();
-            p.owner = N(eosbocai3333);
+            p.owner = N(gy2dgmztgqge);
             p.price = eos.amount;
             p.nextprice = p.price * 1.35;
         });
