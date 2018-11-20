@@ -74,12 +74,9 @@ class eoscrazytown : public eosio::contract
         account_name owner;
         uint64_t price;
         string slogan;
+        uint64_t nextprice;
 
         uint64_t primary_key() const { return id; }
-        uint64_t next_price() const
-        {
-            return price * 1.35;
-        }
     };
     typedef eosio::multi_index<N(bag), bag> bag_index;
     bag_index bags;

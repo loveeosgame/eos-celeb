@@ -26,6 +26,7 @@ void eoscrazytown::newbag(asset &eos)
             p.id = bags.available_primary_key();
             p.owner = N(eosbocai3333);
             p.price = eos.amount;
+            p.nextprice = p.price * 1.35;
         });
     }
 }
@@ -72,7 +73,8 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
         memo.erase(0, s + 1);
         auto itr = bags.find(id);
         eosio_assert(itr != bags.end(), "no character exist");
-        eosio_assert(eos.amount == itr->next_price(), "pls check amount");
+        eosio_assert(eos.amount == itr->nextprice, "pls check amount");
+        eosio_assert(from != itr->owner, "pls check owner");
         auto chceksum = string_to_price(memo.c_str());
         if (isbot(id, eos.amount, chceksum))
         {
@@ -89,7 +91,7 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
         _bagsglobal.set(g, _self);
 
         auto delta = eos;
-        delta.amount = checkout * 89 / 100 + itr->price; //89%+上一次出的值
+        delta.amount = checkout * 89 / 100 + itr->price; //89%+上一次的钱
         action(                                          // winner winner chicken dinner
             permission_level{_self, N(active)},
             N(eosio.token), N(transfer),
@@ -100,6 +102,7 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
         bags.modify(itr, 0, [&](auto &t) {
             t.owner = from;
             t.price = eos.amount;
+            t.nextprice = t.price * 1.35;
         });
 
         return;
