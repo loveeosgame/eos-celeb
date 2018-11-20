@@ -36,6 +36,7 @@ export default {
   buy_modal_msg_cancel: 'You cancelled purchase of {buyTarget} in Scatter.',
   buy_modal_msg_fail_title: 'Purchase Failed',
   buy_modal_msg_fail_body: 'Sorry, failed to purchase {buyTarget} with {priceReadable}: <br>{content}',
+  buy_modal_msg_fail_body1: 'Sorry, the price is wrong, please refresh and try again!',
   buy_modal_msg_fail_overdrawn: 'Insufficient balance',
   buy_modal_msg_fail_no_enough: 'Some one has already purchased it',
   buy_modal_msg_fail_time: 'Purchase stage not started or is closed',
