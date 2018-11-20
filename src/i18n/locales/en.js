@@ -60,17 +60,15 @@ export default {
   leaderboard_label_celeb_count: 'Owned Heros',
   leaderboard_label_celeb_top: 'Most Valued 5 Heros',
   about_content: `
-  <h2>Join Community</h2>
-  <p><a href="https://t.me/joinchat/GwrwAxBDAxSDsIlzB1V19w" target="_blank">Telegram group</a>
+  <h2>The game is very risky, please see the rules! </h2>
   <h2>Pricing Description</h2>
   <p>The initial price per celebrity is 0.1 EOS</p>
   <p>The next price is: the previous price *1.35.</p>
-  <p>&nbsp;</p>
   <p>35% of premium is allocated according to the following ratio</p>
   <ul>
-    <li>The previous person took 89.9%</li>
+    <li>The previous person took 89%</li>
     <li>Pot 10%</li>
-    <li>Team 0.01% (ram fee and maintenance fee)</li>
+    <li>Team 1% (ram fee and maintenance fee)</li>
   </ul>
   <h2>For example:</h2>
   <p>The current price for Trump is 10 EOS</p>
@@ -78,18 +76,22 @@ export default {
   <p>10 EOS are paied to the previous buyer</p>
   <ul>
     <li>The remaining 10*0.35=3.5 EOS will be allocated according to the ratio</li>
-    <li>Previous buyer takes 3.5*89.9%=3.143 EOS</li>
+    <li>Previous buyer takes 3.5*89%=3.115 EOS</li>
     <li>Pot pool takes 3.5*10%=0.35 EOS</li>
     <li>The team takes 3.5*0.1%=0.035 EOS</li>
   </ul>
 
   <h2>fomo</h2>
-  <p>Fomo time is set to 1 hour  </p>
-  <p>Add 1 minute each time someone buys, up to 1 hour</p>
+  <p>Fomo time is set to 10 minutes </p>
+  <p>Reset to 10 minutes each time someone buys</p>
 
   <h2>Compensation loss</h2>
   <p>After the end of the first set</p>
   <p>Subsequent distribution of a certain token based on the amount of the hero (the grand prize winner does not)</p>
   <p>The second set will give 10% of the money to the previous token holder .</p>
+
+  <h2>Preventing robots</h2>
+  <p>Every time memo uses a new rule (the contract is open source 1 hour after the game starts,)</p>
+  <p>If the wrong memo goes in, the money will not be refunded, and this money will be allocated to the hero holder.</p>
   `
 }

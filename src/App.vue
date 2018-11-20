@@ -70,7 +70,7 @@
     <footer class="footer has-background-grey-dark has-text-light">
       <div class="content has-text-centered">
         <p>
-          <strong class="has-text-white">EOS Celebrity</strong> Some Right Reserved.
+          <strong class="has-text-white">FASTFAST RUN</strong> Some Right Reserved.
         </p>
       </div>
     </footer>
@@ -78,14 +78,14 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
-import { network } from "./config";
-import InviteModal from "@/components/InviteModal";
+import { mapState, mapActions, mapGetters } from 'vuex'
+import { network } from './config'
+import InviteModal from '@/components/InviteModal'
 
-const requiredFields = { accounts: [network] };
+const requiredFields = { accounts: [network] }
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     InviteModal
   },
@@ -93,63 +93,63 @@ export default {
     isInviteDialogActive: false,
     isNavActive: false
   }),
-  created() {
+  created () {
     // @TODO: replace with Scatter JS
-    document.addEventListener("scatterLoaded", () => {
-      console.log("Scatter Loaded");
-      this.handleScatterLoaded();
-    });
+    document.addEventListener('scatterLoaded', () => {
+      console.log('Scatter Loaded')
+      this.handleScatterLoaded()
+    })
 
     // if (localStorage.getItem('eos_celeb_ann') !== '2') {
     this.$snackbar.open({
-      message: this.$t("announcement"),
-      type: "is-warning",
-      position: "is-top",
-      actionText: "OK",
+      message: this.$t('announcement'),
+      type: 'is-warning',
+      position: 'is-top',
+      actionText: 'OK',
       indefinite: true
       // onAction: () => localStorage.setItem('eos_celeb_ann', '2'),
-    });
+    })
     // }
   },
   methods: {
-    ...mapActions(["initScatter", "setIdentity"]),
-    handleScatterLoaded() {
-      const { scatter } = window;
-      this.initScatter(scatter);
+    ...mapActions(['initScatter', 'setIdentity']),
+    handleScatterLoaded () {
+      const { scatter } = window
+      this.initScatter(scatter)
       // this.requestId();
     },
-    async requestId() {
-      await this.suggestNetworkSetting();
-      const identity = await this.scatter.getIdentity(requiredFields);
-      this.setIdentity(identity);
+    async requestId () {
+      await this.suggestNetworkSetting()
+      const identity = await this.scatter.getIdentity(requiredFields)
+      this.setIdentity(identity)
     },
-    async forgetId() {
-      await this.scatter.forgetIdentity();
-      this.setIdentity(null);
+    async forgetId () {
+      await this.scatter.forgetIdentity()
+      this.setIdentity(null)
     },
-    async suggestNetworkSetting() {
+    async suggestNetworkSetting () {
       try {
-        await this.scatter.suggestNetwork(network);
+        await this.scatter.suggestNetwork(network)
       } catch (error) {
-        console.info("User canceled to suggestNetwork");
+        console.info('User canceled to suggestNetwork')
       }
     },
-    switchNav() {
-      this.isNavActive = !this.isNavActive;
+    switchNav () {
+      this.isNavActive = !this.isNavActive
     },
-    invite() {
-      this.isInviteDialogActive = true;
+    invite () {
+      this.isInviteDialogActive = true
     },
-    updateLocaleConfig() {
-      console.log("Update locale", this.$i18n.locale);
-      localStorage.setItem("eos_celeb_locale", this.$i18n.locale);
+    updateLocaleConfig () {
+      console.log('Update locale', this.$i18n.locale)
+      localStorage.setItem('eos_celeb_locale', this.$i18n.locale)
     }
   },
   computed: {
-    ...mapState(["identity", "scatter", "eos"]),
-    ...mapGetters(["account"])
+    ...mapState(['identity', 'scatter', 'eos']),
+    ...mapGetters(['account'])
   }
-};
+}
 </script>
 
 <style>
