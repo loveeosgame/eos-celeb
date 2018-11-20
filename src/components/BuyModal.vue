@@ -28,126 +28,135 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
-import * as util from '../blockchain/util'
+import { mapState, mapGetters } from "vuex";
+import * as util from "../blockchain/util";
 
 const errorMessages = {
-  'overdrawn balance': {
-    message: 'buy_modal_msg_fail_overdrawn'
+  "overdrawn balance": {
+    message: "buy_modal_msg_fail_overdrawn"
   },
-  'no enough eos': {
-    message: 'buy_modal_msg_fail_no_enough',
+  "no enough eos": {
+    message: "buy_modal_msg_fail_no_enough",
     refresh: true
   },
-  'not correct time': {
-    message: 'buy_modal_msg_fail_time'
+  "not correct time": {
+    message: "buy_modal_msg_fail_time"
   },
-  'no character exist': {
-    message: 'buy_modal_msg_fail_celeb_not_exist'
+  "no character exist": {
+    message: "buy_modal_msg_fail_celeb_not_exist"
   }
-}
+};
 
 export default {
-  name: 'BuyModal',
-  props: ['priceInfo'],
+  name: "BuyModal",
+  props: ["priceInfo"],
   methods: {
-    getPrice () {
+    getPrice() {
       if (!this.priceInfo) {
-        return 0
+        return 0;
       } else {
-        return this.priceInfo.nextprice
+        return this.priceInfo.nextprice;
       }
     },
-    getcheecksum (id, price) {
-      return id * price + 1
+    getcheecksum(id, price) {
+      return id * price + 1;
     },
-    async buy () {
-      const { account, eos } = this
-      const price = this.getPrice()
-      const priceReadable = `${(price / 10000).toFixed(4)} EOS`
-      const buyTarget = this.celebBaseList[this.priceInfo.id].name
+    async buy() {
+      const { account, eos } = this;
+      const price = this.getPrice();
+      const priceReadable = `${(price / 10000).toFixed(4)} EOS`;
+      const buyTarget = this.celebBaseList[this.priceInfo.id].name;
       const memo = [
-        'buy',
+        "buy",
         String(this.priceInfo.id),
         this.getcheecksum(this.priceInfo.id, price)
-      ]
+      ];
 
       try {
         await eos.transfer(
           account.name,
-          'eosbocaihero',
+          "eosbocaihero",
           priceReadable,
-          `${memo.join(' ')}`,
+          `${memo.join(" ")}`,
           {
             authorization: [`${account.name}@${account.authority}`]
           }
-        )
+        );
         this.$toast.open({
-          type: 'is-success',
+          type: "is-success",
           duration: 5000,
-          message: this.$t('buy_modal_msg_success', {
+          message: this.$t("buy_modal_msg_success", {
             priceReadable,
             buyTarget
           }),
-          position: 'is-bottom',
+          position: "is-bottom",
           queue: false
-        })
-        this.$parent.close()
-        this.$store.dispatch('updateCeleb')
+        });
+        this.$parent.close();
+        this.$store.dispatch("updateCeleb");
       } catch (error) {
-        if (typeof error === 'object') {
+        if (typeof error === "object") {
           if (
-            error.message.indexOf('User rejected the signature request') > -1
+            error.message.indexOf("User rejected the signature request") > -1
           ) {
-            this.$parent.close()
+            this.$parent.close();
             this.$toast.open({
-              type: 'is-danger',
+              type: "is-danger",
               duration: 5000,
-              message: this.$t('buy_modal_msg_cancel', { buyTarget }),
-              position: 'is-bottom',
+              message: this.$t("buy_modal_msg_cancel", { buyTarget }),
+              position: "is-bottom",
               queue: false
-            })
+            });
+          } else if (error.message.indexOf("pls check amount") > -1) {
+            this.$dialog.alert({
+              title: this.$t("buy_modal_msg_fail_title"),
+              message: this.$t("buy_modal_msg_fail_body1"),
+              onConfirm: () => {
+                this.$parent.close();
+                this.$store.dispatch("updateCeleb");
+              }
+            });
           } else {
             this.$dialog.alert({
-              title: this.$t('buy_modal_msg_fail_title'),
-              message: this.$t('buy_modal_msg_fail_body', {
+              title: this.$t("buy_modal_msg_fail_title"),
+              message: this.$t("buy_modal_msg_fail_body", {
                 priceReadable,
                 buyTarget,
                 content: `Unknown Error: <br>${util.escapeHtml(error.message)}`
               }),
               onConfirm: () => {
-                this.$parent.close()
-                this.$store.dispatch('updateCeleb')
+                this.$parent.close();
+                this.$store.dispatch("updateCeleb");
               }
-            })
+            });
           }
         } else {
-          const errorStr = String(error)
+          const errorStr = String(error);
           for (let errorKeyword in errorMessages) {
             // Found a known error
-            const errorProc = errorMessages[errorKeyword]
+            const errorProc = errorMessages[errorKeyword];
             if (errorStr.indexOf(errorKeyword) > -1) {
               this.$dialog.alert({
-                title: this.$t('buy_modal_msg_fail_title'),
-                message: this.$t('buy_modal_msg_fail_body', {
+                title: this.$t("buy_modal_msg_fail_title"),
+                message: this.$t("buy_modal_msg_fail_body", {
                   priceReadable,
                   buyTarget,
                   content: this.$t(errorProc.message)
                 }),
                 onConfirm: () => {
                   if (errorProc.refresh) {
-                    this.$parent.close()
-                    this.$store.dispatch('updateCeleb')
+                    this.$parent.close();
+                    this.$store.dispatch("updateCeleb");
                   }
                 }
-              })
-              return
+              });
+              return;
             }
           }
           // Error: unknown error
           this.$dialog.alert({
-            title: this.$t('buy_modal_msg_fail_title'),
-            message: this.$t('buy_modal_msg_fail_body', {
+            title: this.$t("buy_modal_msg_fail_title"),
+            message: this.$t("buy_modal_msg_fail_body", {
               priceReadable,
               buyTarget,
               content: `Unknown Error: <br><pre style="white-space:pre-wrap;word-wrap:break-word;">${util.escapeHtml(
@@ -155,17 +164,17 @@ export default {
               )}</pre>`
             }),
             onConfirm: () => {
-              this.$parent.close()
-              this.$store.dispatch('updateCeleb')
+              this.$parent.close();
+              this.$store.dispatch("updateCeleb");
             }
-          })
+          });
         }
       }
     }
   },
   computed: {
-    ...mapState(['identity', 'scatter', 'eos', 'account', 'celebBaseList']),
-    ...mapGetters(['account'])
+    ...mapState(["identity", "scatter", "eos", "account", "celebBaseList"]),
+    ...mapGetters(["account"])
   }
-}
+};
 </script>

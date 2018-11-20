@@ -36,6 +36,7 @@ export default {
   buy_modal_msg_cancel: '您在 Scatter 中取消了 {buyTarget} 的购买。',
   buy_modal_msg_fail_title: '购买失败',
   buy_modal_msg_fail_body: '抱歉，以 {priceReadable} 购买 {buyTarget} 失败：<br>{content}',
+  buy_modal_msg_fail_body1: '抱歉，价格不对,请刷新再试一次!',
   buy_modal_msg_fail_overdrawn: '您的账户余额不足',
   buy_modal_msg_fail_no_enough: '有人比您抢先一步买下了该名人',
   buy_modal_msg_fail_time: '还没有到开始时间，或已超过结束时间',
