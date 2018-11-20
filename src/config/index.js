@@ -5,7 +5,7 @@ import {
 // For testnet
 // export const network = networks.kylin;
 // For EosAsia
-export const network = networks.local
+export const network = networks.eosasia
 
 export const i18n = [{
   langDisplay: '中文',
