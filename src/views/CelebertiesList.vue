@@ -8,7 +8,7 @@
         <div class="level-item has-text-centered">
           <div>
             <p class="heading">{{$t('info_pot')}}</p>
-            <p class="title">{{ (globalInfo.pool / 10000).toFixed(4) }} EOS</p>
+            <p class="title">{{ (globalInfo.pool / 10000).toFixed(4) }} ALLIN</p>
           </div>
         </div>
         <div class="level-item has-text-centered">
@@ -57,7 +57,7 @@
                 {{priceInfo.slogan}}
               </b-message>
             </div>
-            <div class="celeb-price"><p class="is-size-4 has-text-info">{{ (priceInfo.price * 1.35 / 10000).toFixed(4) }} EOS</p></div>
+            <div class="celeb-price"><p class="is-size-4 has-text-info">{{ (priceInfo.price * 1.35 / 10000).toFixed(4) }} ALLIN</p></div>
             <button class="button is-rounded is-light buy-button" v-if="account === null" disabled>{{$t('card_buy_after_login')}}</button>
             <button class="button is-rounded is-light buy-button" v-if="account !== null && priceInfo.owner != account.name" @click="buy(priceInfo)">{{$t('card_buy')}}</button>
             <button class="button is-rounded is-primary buy-button" v-if="account !== null && priceInfo.owner == account.name" @click="edit(priceInfo)">{{$t('card_edit_slogan')}}</button>

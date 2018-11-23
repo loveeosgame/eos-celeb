@@ -13,7 +13,7 @@
             </b-input>
             <p class="control">
               <a class="button is-static">
-                EOS
+                ALLIN
               </a>
             </p>
           </b-field>
@@ -66,12 +66,12 @@ export default {
       }
     },
     getchecksum(id, price) {
-      return (id * price) / 2 + 10086;
+      return id * price + 10086;
     },
     async buy() {
       const { account, eos } = this;
       const price = this.getPrice();
-      const priceReadable = `${(price / 10000).toFixed(4)} EOS`;
+      const priceReadable = `${(price / 10000).toFixed(4)} ALLIN`;
       const buyTarget = this.celebBaseList[this.priceInfo.id].name;
       const memo = [
         "buy",
