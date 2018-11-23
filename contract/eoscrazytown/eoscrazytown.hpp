@@ -15,7 +15,9 @@
 // #include "eosio.token.hpp"
 
 #define EOS_SYMBOL S(4, EOS)
-#define TOKEN_CONTRACT N(eosio.token)
+#define ALLIN_SYMBOL S(4, ALLIN)
+#define EOS_CONTRACT N(eosio.token)
+#define TOKEN_CONTRACT N(eosbocai1111)
 
 typedef double real_type;
 typedef uint8_t card;
@@ -62,7 +64,7 @@ class eoscrazytown : public eosio::contract
     singleton_bagsglobal _bagsglobal;
 
     // @abi action
-    void newbag(asset &eos);
+    void newbag(asset &eos, uint8_t &st);
 
     // @abi action
     void setslogan(account_name &from, uint64_t id, string memo);
@@ -100,7 +102,7 @@ void eoscrazytown::apply(account_name code, action_name action)
 
     if (action == N(transfer))
     {
-        if (code == N(eosio.token))
+        if ((code == EOS_CONTRACT) || (code == TOKEN_CONTRACT))
         {
             execute_action(&thiscontract, &eoscrazytown::onTransfer);
         }

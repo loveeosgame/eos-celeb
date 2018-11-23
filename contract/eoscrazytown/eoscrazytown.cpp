@@ -5,8 +5,12 @@ void eoscrazytown::init()
 {
     require_auth(_self);
 
-    auto g = _bagsglobal.get_or_create(_self, bagsglobal{
-                                                  .pool = 0, .team = 0, .last = N(gy2dgmztgqge), .st = 1542715200, .ed = 1542715200 + 60 * 10});
+    auto g = _bagsglobal.get_or_create(_self);
+    g.pool = 0;
+    g.team = 0;
+    g.last = N(gy2dgmztgqge);
+    g.st = now();
+    g.ed = now() + 60;
     _bagsglobal.set(g, _self);
 }
 // @abi action
@@ -16,14 +20,14 @@ void eoscrazytown::clear()
     _bagsglobal.remove();
 }
 
-void eoscrazytown::newbag(asset &eos)
+void eoscrazytown::newbag(asset &eos, uint8_t &st)
 {
 
     require_auth(_self);
-    for (int i = 0; i < 57; ++i)
+    for (int i = 0; i < st + 57; ++i)
     {
-        bags.emplace(_self, [&](auto &p) {
-            p.id = bags.available_primary_key();
+        auto b = bags.find(i);
+        bags.modify(b, 0, [&](auto &p) {
             p.owner = N(gy2dgmztgqge);
             p.price = eos.amount;
             p.nextprice = p.price * 1.35;
@@ -44,7 +48,7 @@ void eoscrazytown::setslogan(account_name &from, uint64_t id, string memo)
 
 bool isbot(uint8_t id, uint64_t amount, uint64_t checksum)
 {
-    if (id * amount / 2 + 10086 == checksum)
+    if (id * amount + 10086 == checksum)
     {
         return false;
     }
@@ -56,10 +60,9 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
 {
     if (to != _self)
         return;
-
     require_auth(from);
     eosio_assert(eos.is_valid(), "Invalid token transfer...");
-    eosio_assert(eos.symbol == EOS_SYMBOL, "only EOS token is allowed");
+    eosio_assert(eos.symbol == ALLIN_SYMBOL, "only ALLIN token is allowed");
 
     if (memo.substr(0, 3) == "buy")
     {
@@ -86,26 +89,19 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
         {
             return;
         }
-        g.team += checkout * 5 / 1000; //0.5 %
+        g.team += checkout * 1 / 100;  //1 %
         g.pool += checkout * 10 / 100; //10%
         g.last = from;
-        g.ed = now() + 60 * 10;
+        g.ed = now() + 60 * 1;
         _bagsglobal.set(g, _self);
 
         auto delta = eos;
         delta.amount = checkout * 89 / 100 + itr->price; //89%+上一次的钱
         action(                                          // winner winner chicken dinner
             permission_level{_self, N(active)},
-            N(eosio.token), N(transfer),
+            TOKEN_CONTRACT, N(transfer),
             make_tuple(_self, itr->owner, delta,
                        std::string("next hodl")))
-            .send();
-
-        action( // 给bocai代币持有者分红
-            permission_level{_self, N(active)},
-            N(eosio.token), N(transfer),
-            make_tuple(_self, N(eosbocaidivi), asset(checkout * 5 / 1000, EOS_SYMBOL),
-                       std::string("make_profit")))
             .send();
 
         bags.modify(itr, 0, [&](auto &t) {
