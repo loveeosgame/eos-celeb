@@ -80,15 +80,26 @@ export default {
       ];
 
       try {
-        await eos.transfer(
-          account.name,
-          "eosbocaihero",
-          priceReadable,
-          `${memo.join(" ")}`,
-          {
-            authorization: [`${account.name}@${account.authority}`]
-          }
-        );
+        await eos.transaction({
+          actions: [
+            {
+              account: "eosbocai1111",
+              name: "transfer",
+              authorization: [
+                {
+                  actor: account.name,
+                  permission: account.authority
+                }
+              ],
+              data: {
+                from: account.name,
+                to: "eosbocaihero",
+                quantity: priceReadable,
+                memo: `${memo.join(" ")}`
+              }
+            }
+          ]
+        });
         this.$toast.open({
           type: "is-success",
           duration: 5000,
