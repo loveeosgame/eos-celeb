@@ -82,7 +82,7 @@ export default {
         await eos.transaction({
           actions: [
             {
-              account: "eosbocai1111",
+              account: "eosio.token",
               name: "transfer",
               authorization: [
                 {
