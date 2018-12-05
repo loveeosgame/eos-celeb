@@ -1,5 +1,5 @@
 <template>
-  <form action="">
+  <form action>
     <div class="modal-card" style="width: auto">
       <header class="modal-card-head">
         <p class="modal-card-title">{{$t('buy_modal_title')}} {{celebBaseList[priceInfo.id].name}}</p>
@@ -7,21 +7,20 @@
       <section class="modal-card-body">
         <b-field :label="$t('buy_modal_label')">
           <b-field>
-            <b-input
-              v-bind:value="(getPrice() / 10000).toFixed(4)"
-              readonly>
-            </b-input>
+            <b-input v-bind:value="(getPrice() / 10000).toFixed(4)" readonly></b-input>
             <p class="control">
-              <a class="button is-static">
-                ALLIN
-              </a>
+              <a class="button is-static">EOS</a>
             </p>
           </b-field>
         </b-field>
       </section>
       <footer class="modal-card-foot">
         <button class="button is-rounded is-primary" @click="buy">{{$t('buy_modal_pay')}}</button>
-        <button class="button is-rounded" type="button" @click="$parent.close()">{{$t('buy_modal_cancel')}}</button>
+        <button
+          class="button is-rounded"
+          type="button"
+          @click="$parent.close()"
+        >{{$t('buy_modal_cancel')}}</button>
       </footer>
     </div>
   </form>
@@ -71,7 +70,7 @@ export default {
     async buy() {
       const { account, eos } = this;
       const price = this.getPrice();
-      const priceReadable = `${(price / 10000).toFixed(4)} ALLIN`;
+      const priceReadable = `${(price / 10000).toFixed(4)} EOS`;
       const buyTarget = this.celebBaseList[this.priceInfo.id].name;
       const memo = [
         "buy",

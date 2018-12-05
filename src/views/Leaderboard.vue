@@ -9,7 +9,7 @@
           {{ props.row.name }}
         </b-table-column>
         <b-table-column field="totalAssetValue" :label="$t('leaderboard_label_total_value')">
-          {{ (props.row.totalAssetValue / 10000).toFixed(4) }} ALLIN
+          {{ (props.row.totalAssetValue / 10000).toFixed(4) }} EOS
         </b-table-column>
         <b-table-column field="cards" :label="$t('leaderboard_label_celeb_count')">
           {{ props.row.cards }}
@@ -18,7 +18,7 @@
           <div class="celeb-item" :key="item.id" v-for="item in props.row.assets">
             <b-taglist attached>
                 <b-tag size="is-medium" type="is-dark">{{celebBaseList[item.id].name}}</b-tag>
-                <b-tag size="is-medium" :type="item.category">{{(item.price/10000).toFixed(4)}} ALLIN</b-tag>
+                <b-tag size="is-medium" :type="item.category">{{(item.price/10000).toFixed(4)}} EOS</b-tag>
                 <b-tag size="is-medium" type="is-light" v-if="item.slogan">{{item.slogan}}</b-tag>
             </b-taglist>
           </div>
