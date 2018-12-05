@@ -23,3 +23,5 @@ yarn-error.log*
 *.wasm
 *.abi
 *.pyc
+*.sh
+contract/t.py
