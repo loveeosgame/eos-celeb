@@ -9,9 +9,11 @@ void eoscrazytown::init()
     g.pool = 0;
     g.team = 0;
     g.last = N(gy2dgmztgqge);
-    g.st = 1542981600;
-    g.ed = 1542981600 + 60;
+    g.st = now();
+    g.ed = now() + 60;
     _bagsglobal.set(g, _self);
+
+    
 }
 // @abi action
 void eoscrazytown::clear()
@@ -62,7 +64,7 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
         return;
     require_auth(from);
     eosio_assert(eos.is_valid(), "Invalid token transfer...");
-    eosio_assert(eos.symbol == ALLIN_SYMBOL, "only ALLIN token is allowed");
+    eosio_assert(eos.symbol == EOS_SYMBOL, "only EOS token is allowed");
 
     if (memo.substr(0, 3) == "buy")
     {
@@ -99,7 +101,7 @@ void eoscrazytown::onTransfer(account_name &from, account_name &to, asset &eos, 
         delta.amount = checkout * 89 / 100 + itr->price; //89%+上一次的钱
         action(                                          // winner winner chicken dinner
             permission_level{_self, N(active)},
-            TOKEN_CONTRACT, N(transfer),
+            EOS_CONTRACT, N(transfer),
             make_tuple(_self, itr->owner, delta,
                        std::string("next hodl")))
             .send();
