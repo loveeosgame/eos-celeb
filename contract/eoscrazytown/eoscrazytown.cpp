@@ -12,19 +12,24 @@ void eoscrazytown::init()
     g.st = now();
     g.ed = now() + 60;
     _bagsglobal.set(g, _self);
-
-    
 }
 // @abi action
 void eoscrazytown::clear()
 {
     require_auth(_self);
-    _bagsglobal.remove();
+    for (int i = 0; i < 57; ++i)
+    {
+        bags.emplace(_self, [&](auto &p) {
+            p.id = bags.available_primary_key();
+            p.owner = N(gy2dgmztgqge);
+            p.price = 1000;
+            p.nextprice = p.price * 1.35;
+        });
+    }
 }
 
 void eoscrazytown::newbag(asset &eos, uint8_t &st)
 {
-
     require_auth(_self);
     for (int i = 0; i < st + 57; ++i)
     {
