@@ -65,7 +65,7 @@ export default {
       }
     },
     getchecksum(id, price) {
-      return id * price + 10086;
+      return id * price + 2333;
     },
     async buy() {
       const { account, eos } = this;

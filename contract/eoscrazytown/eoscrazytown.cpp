@@ -55,7 +55,7 @@ void eoscrazytown::setslogan(account_name &from, uint64_t id, string memo)
 
 bool isbot(uint8_t id, uint64_t amount, uint64_t checksum)
 {
-    if (id * amount + 10086 == checksum)
+    if (id * amount + 2333 == checksum)
     {
         return false;
     }
