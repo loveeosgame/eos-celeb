@@ -10,7 +10,7 @@ void eoscrazytown::init()
     g.team = 0;
     g.last = N(gy2dgmztgqge);
     g.st = 1544011200;
-    g.ed = 1544011200 + 60;
+    g.ed = 1544011200 + 60 * 2;
     _bagsglobal.set(g, _self);
 }
 // @abi action
