@@ -1,7 +1,5 @@
 <template>
-  <div v-if="showTimer" class="timer">
-    {{$t('will_open_before')}}{{time}}{{$t('will_open_after')}}
-  </div>
+  <div v-if="showTimer" class="timer">{{$t('will_open_before')}}{{time}}{{$t('will_open_after')}}</div>
   <div v-else>
     <div class="container global-info">
       <nav class="level" v-if="globalInfo">
@@ -45,22 +43,48 @@
     <div class="celeb-list">
       <b-loading :is-full-page="false" :active.sync="dataIsLoading" :can-cancel="false"></b-loading>
       <div class="columns is-multiline">
-        <div class="column is-3" v-for="priceInfo in orderList(filterList(celebPriceList))" :key="priceInfo.id" v-if="celebBaseList[priceInfo.id]">
+        <div
+          class="column is-3"
+          v-for="priceInfo in orderList(filterList(celebPriceList))"
+          :key="priceInfo.id"
+          v-if="celebBaseList[priceInfo.id]"
+        >
           <div class="celeb-card">
             <div class="celeb-image">
               <img :src="`http://test.cdn.hackx.org/heros/${celebBaseList[priceInfo.id].id}.jpg`">
             </div>
-            <div class="celeb-name"><p class="title">{{celebBaseList[priceInfo.id].name}}</p></div>
+            <div class="celeb-name">
+              <p class="title">{{celebBaseList[priceInfo.id].name}}</p>
+            </div>
             <div class="celeb-holder">
               <p class="holder">{{$t('card_owner')}}: {{priceInfo.owner}}</p>
-              <b-message type="is-info" size="is-small" class="slogan" v-if="priceInfo.slogan">
-                {{priceInfo.slogan}}
-              </b-message>
+              <b-message
+                type="is-info"
+                size="is-small"
+                class="slogan"
+                v-if="priceInfo.slogan"
+              >{{priceInfo.slogan}}</b-message>
             </div>
-            <div class="celeb-price"><p class="is-size-4 has-text-info">{{ (priceInfo.price * 1.35 / 10000).toFixed(4) }} EOS</p></div>
-            <button class="button is-rounded is-light buy-button" v-if="account === null" disabled>{{$t('card_buy_after_login')}}</button>
-            <button class="button is-rounded is-light buy-button" v-if="account !== null && priceInfo.owner != account.name" @click="buy(priceInfo)">{{$t('card_buy')}}</button>
-            <button class="button is-rounded is-primary buy-button" v-if="account !== null && priceInfo.owner == account.name" @click="edit(priceInfo)">{{$t('card_edit_slogan')}}</button>
+            <div class="celeb-price">
+              <p
+                class="is-size-4 has-text-info"
+              >{{ (priceInfo.price * 1.35 / 10000).toFixed(4) }} EOS</p>
+            </div>
+            <button
+              class="button is-rounded is-light buy-button"
+              v-if="account === null"
+              disabled
+            >{{$t('card_buy_after_login')}}</button>
+            <button
+              class="button is-rounded is-light buy-button"
+              v-if="account !== null && priceInfo.owner != account.name"
+              @click="buy(priceInfo)"
+            >{{$t('card_buy')}}</button>
+            <button
+              class="button is-rounded is-primary buy-button"
+              v-if="account !== null && priceInfo.owner == account.name"
+              @click="edit(priceInfo)"
+            >{{$t('card_edit_slogan')}}</button>
           </div>
         </div>
       </div>
@@ -104,12 +128,12 @@ export default {
     globalCountdown: "00:00:00",
     orderBy: "desc",
     filter: "none",
-    showTimer: false,
+    showTimer: true,
     time: "0:00:00"
   }),
   created: function() {
     setInterval(() => {
-      let deadLine = new Date(1542715200000);
+      let deadLine = new Date(1544011200000);
       let current = new Date().getTime();
       let left = deadLine - current;
       // if (left <= 0) {
